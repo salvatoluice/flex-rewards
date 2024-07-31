@@ -5,6 +5,7 @@ import Home from './Home'
 import SignUp from './auth/SignUp'
 import NotFoundPage from '../elements/NotFoundPage'
 import Dashboard from '../Merchant/Dashboard'
+import Deals from '../Merchant/Deals'
 
 const AppRoutes = () => {
   return (
@@ -15,6 +16,7 @@ const AppRoutes = () => {
 
       {/* dashboard */}
       <Route path='/merchant/dashboard' element={<Dashboard />} />
+      <Route path='/merchant/deals' element={<Deals />} />
 
       <Route path='*' element={<NotFoundPage />} />
     </Routes>

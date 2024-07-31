@@ -139,7 +139,7 @@ const Hero = () => {
             <div className="flex flex-col py-8 px-[5%] w-full items-center justify-center">
                 <p className="uppercase text-primary font-medium text-[14px]">working process</p>
                 <p className="text-[20px] font-medium capitalize ">How does it work?</p>
-                <div className="flex w-full gap-6 justify-between items-center mt-4">
+                <div className="flex flex-col md:flex-row w-full gap-6 justify-between items-center mt-4">
                     <div className="flex flex-col items-center">
                         <div className="bg-red-100 rounded-full w-[70px] h-[70px] flex items-center justify-center">
                             <p className="text-primary font-semibold text-[24px]">1</p>

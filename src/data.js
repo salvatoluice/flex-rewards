@@ -372,3 +372,135 @@ export const initialDeals = [
     terms_and_conditions: 'Valid in-store and online.'
   }
 ];
+
+
+export const fakeOrders = [
+    {
+        id: 1,
+        merchant_id: 12,
+        customer_id: 5,
+        total: 850,
+        discount_applied: 50,
+        loyalty_points: 15,
+        items: [
+            {
+                deal_id: 7,
+                quantity: 1,
+                price: 600,
+                discount_applied: 30,
+            },
+            {
+                deal_id: 15,
+                quantity: 2,
+                price: 200,
+                discount_applied: 20,
+            },
+        ],
+    },
+    {
+        id: 2,
+        merchant_id: 18,
+        customer_id: 8,
+        total: 1200,
+        discount_applied: 100,
+        loyalty_points: 20,
+        items: [
+            {
+                deal_id: 3,
+                quantity: 3,
+                price: 400,
+                discount_applied: 50,
+            },
+            {
+                deal_id: 9,
+                quantity: 1,
+                price: 800,
+                discount_applied: 50,
+            },
+        ],
+    },
+    {
+        id: 3,
+        merchant_id: 6,
+        customer_id: 12,
+        total: 450,
+        discount_applied: 30,
+        loyalty_points: 10,
+        items: [
+            {
+                deal_id: 11,
+                quantity: 2,
+                price: 200,
+                discount_applied: 20,
+            },
+            {
+                deal_id: 14,
+                quantity: 1,
+                price: 300,
+                discount_applied: 10,
+            },
+        ],
+    },
+    {
+        id: 4,
+        merchant_id: 23,
+        customer_id: 7,
+        total: 950,
+        discount_applied: 70,
+        loyalty_points: 18,
+        items: [
+            {
+                deal_id: 5,
+                quantity: 1,
+                price: 900,
+                discount_applied: 70,
+            },
+        ],
+    },
+    {
+        id: 5,
+        merchant_id: 19,
+        customer_id: 3,
+        total: 530,
+        discount_applied: 30,
+        loyalty_points: 12,
+        items: [
+            {
+                deal_id: 8,
+                quantity: 3,
+                price: 150,
+                discount_applied: 30,
+            },
+            {
+                deal_id: 10,
+                quantity: 2,
+                price: 250,
+                discount_applied: 10,
+            },
+        ],
+    },
+    {
+        id: 6,
+        merchant_id: 9,
+        customer_id: 22,
+        total: 620,
+        discount_applied: 40,
+        loyalty_points: 14,
+        items: [
+            {
+                deal_id: 2,
+                quantity: 1,
+                price: 300,
+                discount_applied: 20,
+            },
+            {
+                deal_id: 13,
+                quantity: 2,
+                price: 180,
+                discount_applied: 20,
+            },
+        ],
+    },
+];
+
+

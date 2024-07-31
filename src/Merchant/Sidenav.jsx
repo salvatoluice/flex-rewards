@@ -14,7 +14,7 @@ const SideNav = () => {
                 <div className="flex h-full flex-col">
                     <div className="flex flex-col mt-4 text-gray-700 text-[14px] font-light gap-3">
                         <Link
-                            to='/manage'
+                            to='/merchant/dashboard'
                             className={`py-1.5 px-2 rounded-md flex items-center gap-2 hover:bg-gray-50 hover:text-primary ${location.pathname === '/merchant/dashboard' ? 'bg-yellow-50 text-primary font-medium' : ''
                                 }`}
                         >
@@ -24,8 +24,8 @@ const SideNav = () => {
                             Dashboard
                         </Link>
                         <Link
-                            to='/merchant/payments'
-                            className={`py-1.5 px-2 rounded-md flex items-center gap-2 hover:bg-gray-50 hover:text-primary ${location.pathname === '/manage/payments' ? 'bg-gray-100 text-primary' : ''
+                            to='/merchant/orders'
+                            className={`py-1.5 px-2 rounded-md flex items-center gap-2 hover:bg-gray-50 hover:text-primary ${location.pathname === '/merchant/orders' ? 'bg-gray-100 text-primary' : ''
                                 }`}
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">

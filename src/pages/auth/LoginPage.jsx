@@ -46,7 +46,7 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="flex flex border bg-gray-100 items-center justify-center min-h-screen">
+        <div className="flex border bg-gray-100 items-center justify-center min-h-screen">
             <div className="w-full md:w-[55%] bg-white h-fit rounded-md flex flex-col md:flex-row">
                 <div className="hidden md:flex w-full md:w-[50%] justify-center items-center ">
                     <img src={logo} alt="Illustration" />
@@ -70,7 +70,7 @@ const LoginPage = () => {
                                 required
                             />
                         </div>
-                        <div className="relative">
+                        <div className="relative mb-4">
                             <label htmlFor="password" className="block text-[14px] text-black">Password<span className='text-primary '>*</span></label>
                             <input
                                 type={showPassword ? 'text' : 'password'}
@@ -90,12 +90,12 @@ const LoginPage = () => {
                                 {showPassword ? <FiEyeOff /> : <FiEye />}
                             </button>
                         </div>
-                        <p className="text-sm text-gray-700 text-start mt-4 mb-1">Don't have an account? <Link to='/merchant/sign-up' className="text-primary">Sign Up</Link></p>
-                        <div className="">
+                        <div className="mb-4">
                             <button type="submit" className="w-full bg-primary text-white p-2 rounded hover:bg-primary">
-                                {loading ? <ClipLoader color="#fff" /> : 'Log in'}
+                                {loading ? <ClipLoader color="#fff" size={20} /> : 'Log in'}
                             </button>
                         </div>
+                        <p className="text-sm text-gray-700 text-start mt-4 mb-1">Don't have an account? <Link to='/merchant/sign-up' className="text-primary">Sign Up</Link></p>
                     </form>
                     <p className="text-sm text-gray-700 text-end">Forgot your password? <Link to='/request-password-reset' className="text-primary">Reset it here</Link></p>
                 </div>

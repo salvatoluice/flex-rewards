@@ -3,7 +3,7 @@ import CreateDealModal from '../elements/CreateDealModal';
 import DealDetailsModal from '../elements/DealDetailsModal';
 import { initialDeals } from '../data';
 import Layout from './Layout';
-import { FaRegEyeSlash } from 'react-icons/fa';
+import { FaRegEye } from 'react-icons/fa';
 import { IoAddSharp } from 'react-icons/io5';
 
 const Deals = () => {
@@ -71,7 +71,7 @@ const Deals = () => {
                                             onClick={() => handleViewDetails(deal)}
                                             className="text-primary"
                                         >
-                                            <FaRegEyeSlash />
+                                            <FaRegEye size={18} />
                                         </button>
                                     </td>
                                 </tr>

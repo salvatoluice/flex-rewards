@@ -12,7 +12,9 @@ const Navbar = () => {
                 <Link to='/' className='text-gray-700 font-medium text-[15px] hover:text-primary'>Features</Link>
                 <Link to='/' className='text-gray-700 font-medium text-[15px] hover:text-primary'>Why Us </Link>
                 <Link to='/' className='text-gray-700 font-medium text-[15px] hover:text-primary'>Contact</Link>
-                <button className="text-white text-[14px] font-medium px-4 py-1.5 rounded-md bg-primary">Merchant Login</button>
+                <Link to='/merchant/sign-in'>
+                    <button className="text-white text-[14px] font-medium px-4 py-1.5 rounded-md bg-primary">Merchant Login</button>
+                </Link>
             </div>
         </div>
     )

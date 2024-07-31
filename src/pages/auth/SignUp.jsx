@@ -60,18 +60,20 @@ const SignUp = () => {
             });
 
             const result = await response.json();
-            if (result.success) {
-                console.log(result);
-                navigate('/merchant/dashboard')
+
+            if (response.ok && result.token) {
+                localStorage.setItem('access_token', result.token);
+                navigate('/merchant/dashboard');
             } else {
-                console.error(result.message);
+                console.error(result.message || 'Signup failed');
             }
         } catch (error) {
             console.error('Error:', error);
+        } finally {
+            setLoading(false);
         }
-
-        setLoading(false);
     };
+
 
     return (
         <div className="flex border bg-gray-100 items-center justify-center min-h-screen">

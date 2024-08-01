@@ -112,7 +112,7 @@ const Deals = () => {
                     <table className="min-w-full">
                         <thead>
                             <tr>
-                                <th className="py-3 px-4 border-b text-gray-700 text-start font-medium text-[15px] border-gray-300">ID</th>
+                                <th className="py-3 px-4 border-b text-gray-700 text-start font-medium text-[15px] border-gray-300">Img</th>
                                 <th className="py-3 px-4 border-b text-gray-700 text-start font-medium text-[15px] border-gray-300">Title</th>
                                 <th className="py-3 px-4 border-b text-gray-700 text-start font-medium text-[15px] border-gray-300">Category</th>
                                 <th className="py-3 px-4 border-b text-gray-700 text-start font-medium text-[15px] border-gray-300">Price</th>
@@ -123,7 +123,9 @@ const Deals = () => {
                         <tbody>
                             {currentDeals.map(deal => (
                                 <tr key={deal.id}>
-                                    <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{deal.id}</td>
+                                    <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">
+                                        <img src={deal.image} className='w-[30px] h-[30px] rounded-full' alt="" />
+                                    </td>
                                     <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{deal.title}</td>
                                     <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{deal.category}</td>
                                     <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">Kes. {deal.price}</td>

@@ -1,14 +1,43 @@
-import React, { useState } from 'react';
-import { fakeOrders } from '../data';
+import React, { useState, useEffect } from 'react';
 import Layout from './Layout';
 import { FaRegEye } from 'react-icons/fa';
 
 const Orders = () => {
-  const [activeTab, setActiveTab] = useState('all');
+  const [activeTab, setActiveTab] = useState('received');
+  const [orders, setOrders] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const ordersPerPage = 12;
+
+  useEffect(() => {
+    fetchOrders(activeTab);
+  }, [activeTab]);
+
+  const fetchOrders = async (status) => {
+    const token = localStorage.getItem('access_token');
+    const merchant_id = localStorage.getItem('merchant_id');
+
+    try {
+      const response = await fetch(`http://3.136.169.137/api/v1/orders/get-${status}-orders`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ merchant_id, starting_id: 0 }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setOrders(data.orders);
+      } else {
+        console.error('Failed to fetch orders:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+    }
+  };
 
   const handleViewDetails = (order) => {
     setSelectedOrder(order);
@@ -22,12 +51,7 @@ const Orders = () => {
 
   const indexOfLastOrder = currentPage * ordersPerPage;
   const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
-
-  const filteredOrders = activeTab === 'all'
-    ? fakeOrders
-    : fakeOrders.filter(order => order.status === 'pending');
-
-  const currentOrders = filteredOrders.slice(indexOfFirstOrder, indexOfLastOrder);
+  const currentOrders = orders.slice(indexOfFirstOrder, indexOfLastOrder);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -35,16 +59,16 @@ const Orders = () => {
     <Layout>
       <div className="flex items-center mb-4 border-b-2 border-gray-200">
         <button
-          className={`py-2 px-4 text-[14px] ${activeTab === 'all' ? 'text-primary border-b-2 border-primary' : 'text-gray-600'}`}
-          onClick={() => setActiveTab('all')}
+          className={`py-2 px-4 text-[14px] ${activeTab === 'received' ? 'text-primary border-b-2 border-primary' : 'text-gray-600'}`}
+          onClick={() => setActiveTab('received')}
         >
-          All Orders
+          Received Orders
         </button>
         <button
-          className={`py-2 px-4 ml-2 text-[14px] ${activeTab === 'pending' ? 'bg-white text-primary border-b-2 border-primary' : 'text-gray-600'}`}
-          onClick={() => setActiveTab('pending')}
+          className={`py-2 px-4 ml-2 text-[14px] ${activeTab === 'delivered' ? 'text-primary border-b-2 border-primary' : 'text-gray-600'}`}
+          onClick={() => setActiveTab('delivered')}
         >
-          Pending Orders
+          Delivered Orders
         </button>
       </div>
       <div className="overflow-x-auto bg-gray-50 px-4">
@@ -58,11 +82,11 @@ const Orders = () => {
           <thead>
             <tr>
               <th className="py-3 px-4 border-b text-gray-700 text-start font-medium text-[14px] border-gray-300">Order ID</th>
-              <th className="py-3 px-4 border-b text-gray-700 text-start font-medium text-[14px] border-gray-300">Merchant ID</th>
-              <th className="py-3 px-4 border-b text-gray-700 text-start font-medium text-[14px] border-gray-300">Customer ID</th>
+              <th className="py-3 px-4 border-b text-gray-700 text-start font-medium text-[14px] border-gray-300">Customer</th>
+              <th className="py-3 px-4 border-b text-gray-700 text-start font-medium text-[14px] border-gray-300">Deal</th>
               <th className="py-3 px-4 border-b text-gray-700 text-start font-medium text-[14px] border-gray-300">Total</th>
-              <th className="py-3 px-4 border-b text-gray-700 text-start font-medium text-[14px] border-gray-300">Discount</th>
-              <th className="py-3 px-4 border-b text-gray-700 text-start font-medium text-[14px] border-gray-300">Points</th>
+              <th className="py-3 px-4 border-b text-gray-700 text-start font-medium text-[14px] border-gray-300">Discount (%)</th>
+              <th className="py-3 px-4 border-b text-gray-700 text-start font-medium text-[14px] border-gray-300">Loyalty Points</th>
               <th className="py-3 px-4 border-b text-gray-700 text-start font-medium text-[14px] border-gray-300">Actions</th>
             </tr>
           </thead>
@@ -70,11 +94,11 @@ const Orders = () => {
             {currentOrders.map((order) => (
               <tr key={order.id}>
                 <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{order.id}</td>
-                <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{order.merchant_id}</td>
-                <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{order.customer_id}</td>
-                <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">KES {order.total}</td>
-                <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">KES {order.discount_applied}</td>
-                <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{order.loyalty_points}</td>
+                <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{order.customer.first_name} {order.customer.last_name}</td>
+                <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{order.deal.title}</td>
+                <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">KES {order.order.total}</td>
+                <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{order.discount_applied}</td>
+                <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{order.order.loyalty_points}</td>
                 <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">
                   <button
                     onClick={() => handleViewDetails(order)}
@@ -88,49 +112,58 @@ const Orders = () => {
           </tbody>
         </table>
 
+        <div className="flex justify-start items-center mt-2">
+          {[...Array(Math.ceil(orders.length / ordersPerPage)).keys()].map((number) => (
+            <button
+              key={number + 1}
+              onClick={() => paginate(number + 1)}
+              className={`mx-1 px-4 py-2 rounded ${currentPage === number + 1 ? 'bg-primary text-white' : 'bg-gray-50'}`}
+            >
+              {number + 1}
+            </button>
+          ))}
+        </div>
+
         {/* Order Details Modal */}
         {showModal && selectedOrder && (
           <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
             <div className="bg-white p-6 rounded shadow-lg w-[90%] md:w-1/2 max-[90vh] overflow-y-auto">
               <h2 className="text-xl font-bold mb-4">Order Details</h2>
               <p className='flex flex-col mb-3 text-gray-600 font-light text-[13px]'><span className='text-gray-700 font-medium text-[14px]'>Order ID</span> {selectedOrder.id}</p>
-              <p className='flex flex-col mb-3 text-gray-600 font-light text-[13px]'><span className='text-gray-700 font-medium text-[14px]'>Customer</span> {selectedOrder.customer_id}</p>
+              <p className='flex flex-col mb-3 text-gray-600 font-light text-[13px]'><span className='text-gray-700 font-medium text-[14px]'>Customer</span> {selectedOrder.customer.first_name} {selectedOrder.customer.last_name}</p>
+              <p className='flex flex-col mb-3 text-gray-600 font-light text-[13px]'><span className='text-gray-700 font-medium text-[14px]'>Deal</span> {selectedOrder.deal.title}</p>
               <div className="flex w-full items-center justify-between">
-                <p className='flex flex-col mb-3 text-gray-600 font-light text-[13px]'><span className='text-gray-700 font-medium text-[14px]'>Total:</span> KES {selectedOrder.total}</p>
+                <p className='flex flex-col mb-3 text-gray-600 font-light text-[13px]'><span className='text-gray-700 font-medium text-[14px]'>Total</span> KES {selectedOrder.order.total}</p>
                 <p className='flex flex-col mb-3 text-gray-600 font-light text-[13px]'><span className='text-gray-700 font-medium text-[14px]'>Discount Applied</span> KES {selectedOrder.discount_applied}</p>
               </div>
-              <p className='flex flex-col mb-3 text-gray-600 font-light text-[13px]'><span className='text-gray-700 font-medium text-[14px]'>Loyalty Points</span> {selectedOrder.loyalty_points}</p>
+              <p className='flex flex-col mb-3 text-gray-600 font-light text-[13px]'><span className='text-gray-700 font-medium text-[14px]'>Loyalty Points</span> {selectedOrder.order.loyalty_points}</p>
               <p className="font-medium text-[18px] mt-4">Order Items</p>
               <div className="overflow-x-auto">
                 <table className="min-w-full">
                   <thead>
                     <tr>
-                      <th className="py-3 px-4 border-b text-gray-700 text-start font-medium text-[15px] border-gray-300">Deal ID</th>
+                      <th className="py-3 px-4 border-b text-gray-700 text-start font-medium text-[15px] border-gray-300">Deal</th>
                       <th className="py-3 px-4 border-b text-gray-700 text-start font-medium text-[15px] border-gray-300">Quantity</th>
-                      <th className="py-3 px-4 border-b text-gray-700 text-start font-medium text-[15px] border-gray-300">Price (KES)</th>
-                      <th className="py-3 px-4 border-b text-gray-700 text-start font-medium text-[15px] border-gray-300">Discount (KES)</th>
+                      <th className="py-3 px-4 border-b text-gray-700 text-start font-medium text-[15px] border-gray-300">Price</th>
+                      <th className="py-3 px-4 border-b text-gray-700 text-start font-medium text-[15px] border-gray-300">Discount</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {selectedOrder.items.map((item, idx) => (
-                      <tr key={idx}>
-                        <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{item.deal_id}</td>
-                        <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{item.quantity}</td>
-                        <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{item.price}</td>
-                        <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{item.discount_applied}</td>
-                      </tr>
-                    ))}
+                    <tr>
+                      <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{selectedOrder.deal.title}</td>
+                      <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{selectedOrder.quantity}</td>
+                      <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">KES {selectedOrder.price}</td>
+                      <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{selectedOrder.discount_applied}%</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
-              <div className="flex w-full justify-end">
-                <button
-                  onClick={closeModal}
-                  className="bg-primary font-medium text-[14px] text-white px-6 py-1.5 mt-4 rounded"
-                >
-                  Close
-                </button>
-              </div>
+              <button
+                onClick={closeModal}
+                className="mt-6 px-6 py-1.5 bg-primary text-white rounded"
+              >
+                Close
+              </button>
             </div>
           </div>
         )}

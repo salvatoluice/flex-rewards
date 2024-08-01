@@ -13,6 +13,7 @@ const CreateDealModal = ({ show, onClose, onCreate }) => {
         quantity_available: '',
         terms_and_conditions: '',
     });
+    const [image, setImage] = useState(null);
 
     if (!show) return null;
 
@@ -22,8 +23,11 @@ const CreateDealModal = ({ show, onClose, onCreate }) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({ ...prevData, [name]: value }));
     };
+    const handleImageChange = (e) => {
+        setImage(e.target.files[0]);
+    };
     const handleSubmit = () => {
-        onCreate(formData);
+        onCreate({ ...formData, image });
         onClose();
     };
 
@@ -40,7 +44,7 @@ const CreateDealModal = ({ show, onClose, onCreate }) => {
                                     type="text"
                                     name="title"
                                     value={formData.title}
-                                    reauired
+                                    required
                                     onChange={handleChange}
                                     className="p-2 block w-full text-[13px] border-b border-gray-300 focus:border-primary outline-none text-primary"
                                     placeholder="Name of this deal"
@@ -51,7 +55,7 @@ const CreateDealModal = ({ show, onClose, onCreate }) => {
                                 <textarea
                                     name="description"
                                     value={formData.description}
-                                    reauired
+                                    required
                                     onChange={handleChange}
                                     className="p-2 block w-full text-[13px] border-b border-gray-300 focus:border-primary outline-none text-primary"
                                     placeholder="More info about the deal"
@@ -107,7 +111,7 @@ const CreateDealModal = ({ show, onClose, onCreate }) => {
                                     className="bg-primary text-white py-1.5 px-6 rounded-md ml-2"
                                 >
                                     Next
-                                </button>                                
+                                </button>
                             </div>
                         </>
                     ) : (
@@ -153,18 +157,28 @@ const CreateDealModal = ({ show, onClose, onCreate }) => {
                                     placeholder="Terms and Conditions"
                                 />
                             </div>
+                            <div className="mb-4">
+                                <label className="block text-[14px] text-black">Image</label>
+                                <input
+                                    type="file"
+                                    name="image"
+                                    accept="image/*"
+                                    onChange={handleImageChange}
+                                    className="block w-full text-[13px]"
+                                />
+                            </div>
                             <div className="flex justify-end">
                                 <button
                                     type="button"
                                     onClick={handleBack}
-                                        className="text-primary font-medium text-[14px]"
+                                    className="text-primary font-medium text-[14px]"
                                 >
                                     Back
                                 </button>
                                 <button
                                     type="button"
                                     onClick={handleSubmit}
-                                        className="bg-primary text-white py-1.5 px-6 rounded-md ml-2"
+                                    className="bg-primary text-white py-1.5 px-6 rounded-md ml-2"
                                 >
                                     Upload
                                 </button>

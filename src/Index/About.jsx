@@ -7,13 +7,13 @@ const About = () => {
         <div>
             <Topnav text={'About Us'} />
             <div className="flex flex-col px-[5%] ">
-                <div className="flex w-full justify-between">
+                <div className="flex w-full flex-col md:flex-row justify-between">
                     <div className="flex flex-col w-full md:w-[50%]">
                         <p className="text-primary uppercase font-medium text-[15px]">Secure and innovative</p>
                         <p className="text-[24px] text-black font-semibold tracking-wider">Streamlined financial system</p>
                         <p className="text-gray-600 text-[14px] font-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus amet distinctio maiores reiciendis iure eaque totam nam labore. Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus amet distinctio maiores reiciendis iure eaque totam nam labore</p>
                     </div>
-                    <img className='w-[40%] -mt-24' src="https://changachanga-pink.vercel.app/static/media/about.58122ee5a58eabb728e3.png" alt="" />
+                    <img className='w-full md:w-[40%] mt-2 md:-mt-24' src="https://changachanga-pink.vercel.app/static/media/about.58122ee5a58eabb728e3.png" alt="" />
                 </div>
                 <div className="py-8 flex flex-col">
                     <p className="text-primary uppercase font-medium text-[15px]">about the system</p>

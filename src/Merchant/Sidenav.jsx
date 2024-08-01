@@ -1,12 +1,17 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { HiOutlineUsers } from 'react-icons/hi2';
+import logo from '../assets/flexi_logo_amber.svg';
 
 const SideNav = () => {
     const location = useLocation();
 
     return (
         <div className='hidden md:flex flex-col w-[20%] bg-white h-[100vh] overflow-y-auto px-8 py-4 h-[100vh]'>
+            <Link to='/' className="flex items-center gap-2 pl-2">
+                <img src={logo} className='w-auto h-[25px]' alt="" />
+                <p className="text-[#FFCC08] hidden md:flex font-medium tracking-wider text-[19px]">Flexirewards</p>
+            </Link>
             <div className="flex w-full">
                 <Link to='/' className='text-gray-400 font-medium text-[24px]'></Link>
             </div>

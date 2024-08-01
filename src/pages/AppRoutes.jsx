@@ -7,6 +7,7 @@ import NotFoundPage from '../elements/NotFoundPage'
 import Dashboard from '../Merchant/Dashboard'
 import Deals from '../Merchant/Deals'
 import Orders from '../Merchant/Orders'
+import About from '../Index/About'
 
 const AppRoutes = () => {
   return (
@@ -19,6 +20,9 @@ const AppRoutes = () => {
       <Route path='/merchant/dashboard' element={<Dashboard />} />
       <Route path='/merchant/deals' element={<Deals />} />
       <Route path='/merchant/orders' element={<Orders />} />
+
+      {/* company */}
+      <Route path='/company/about' element={<About />} />
 
       <Route path='*' element={<NotFoundPage />} />
     </Routes>

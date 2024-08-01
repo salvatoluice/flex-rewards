@@ -34,6 +34,7 @@ const LoginPage = () => {
 
             if (response.ok) {
                 localStorage.setItem('access_token', data.token);
+                localStorage.setItem('merchant_id', data.data.id);
                 navigate('/merchant/dashboard');
             } else {
                 setError(data.message || 'Login failed');

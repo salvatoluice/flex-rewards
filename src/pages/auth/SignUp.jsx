@@ -61,11 +61,12 @@ const SignUp = () => {
 
             const result = await response.json();
 
-            if (response.ok && result.token) {
-                localStorage.setItem('access_token', result.token);
+            if (response.ok) {
+                localStorage.setItem('access_token', data.token);
+                localStorage.setItem('merchant_id', data.data.id);
                 navigate('/merchant/dashboard');
             } else {
-                console.error(result.message || 'Signup failed');
+                setError(data.message || 'Login failed');
             }
         } catch (error) {
             console.error('Error:', error);

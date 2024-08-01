@@ -226,7 +226,7 @@ const SignUp = () => {
                                     type="submit"
                                     className="bg-primary w-full text-white py-2 px-4 rounded-md transition duration-300"
                                 >
-                                    {loading ? <ClipLoader color="#fff" /> : 'Submit'}
+                                    {loading ? <ClipLoader color="#fff" size={20} /> : 'Submit'}
                                 </button>
                             </div>
                         </form>

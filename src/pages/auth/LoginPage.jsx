@@ -90,14 +90,14 @@ const LoginPage = () => {
                                 {showPassword ? <FiEyeOff /> : <FiEye />}
                             </button>
                         </div>
-                        <div className="mb-4">
+                        <div className="mb-1">
                             <button type="submit" className="w-full bg-primary text-white p-2 rounded hover:bg-primary">
                                 {loading ? <ClipLoader color="#fff" size={20} /> : 'Log in'}
                             </button>
                         </div>
-                        <p className="text-sm text-gray-700 text-start mt-4 mb-1">Don't have an account? <Link to='/merchant/sign-up' className="text-primary">Sign Up</Link></p>
+                        <p className="text-sm text-gray-700 text-start mb-1">Don't have an account? <Link to='/merchant/sign-up' className="text-primary">Sign Up</Link></p>
                     </form>
-                    <p className="text-sm text-gray-700 text-end">Forgot your password? <Link to='/request-password-reset' className="text-primary">Reset it here</Link></p>
+                    {/* <p className="text-sm text-gray-700 text-end">Forgot your password? <Link to='/request-password-reset' className="text-primary">Reset it here</Link></p> */}
                 </div>
             </div>
         </div>

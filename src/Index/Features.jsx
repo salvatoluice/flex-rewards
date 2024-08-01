@@ -1,8 +1,13 @@
 import React from 'react'
+import Topnav from './Topnav'
+import Footer from './Footer'
 
 const Features = () => {
   return (
-    <div>Features</div>
+    <div>
+      <Topnav text={'Features'} />
+      <Footer />
+    </div>
   )
 }
 

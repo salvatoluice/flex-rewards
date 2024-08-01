@@ -49,7 +49,7 @@ const Hero = () => {
             <div className='w-full flex flex-col md:flex-row px-[5%] bg-gradient-to-r from-white to-red-50 items-center gap-4 py-12'>
                 <div className="flex flex-col w-full md:w-[50%] ">
                     <p className="text-black font-semibold text-[50px] ">
-                        One Platform for all <br /> Financial Solutions
+                        One Platform for all Financial Solutions
                     </p>
                     <p className="text-gray-600 text-[15px] font-light">
                         Empower your financial journey with advanced tools for effective and efficient money management.

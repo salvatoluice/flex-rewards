@@ -8,6 +8,9 @@ import Dashboard from '../Merchant/Dashboard'
 import Deals from '../Merchant/Deals'
 import Orders from '../Merchant/Orders'
 import About from '../Index/About'
+import Features from '../Index/Features'
+import FAQ from '../Index/FAQ'
+import Contact from '../Index/Contact'
 
 const AppRoutes = () => {
   return (
@@ -23,6 +26,9 @@ const AppRoutes = () => {
 
       {/* company */}
       <Route path='/company/about' element={<About />} />
+      <Route path='/features' element={<Features />} />
+      <Route path='/company/faqs' element={<FAQ />} />
+      <Route path='/customer-support' element={<Contact />} />
 
       <Route path='*' element={<NotFoundPage />} />
     </Routes>

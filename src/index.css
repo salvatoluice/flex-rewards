@@ -24,3 +24,10 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #ff9800;
 }
+
+.imagebg {
+  background-image: url('./assets/Banner\ Image.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

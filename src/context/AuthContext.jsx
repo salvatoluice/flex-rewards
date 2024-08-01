@@ -12,8 +12,11 @@ const UserProvider = ({ children }) => {
 
             if (token && merchantId) {
                 try {
-                    const response = await fetch(`/merchant/get`, {
-                        method: 'GET',
+                    const response = await fetch('http://3.136.169.137/api/v1/merchant/get', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            id: merchantId
+                        }),
                         headers: {
                             'Authorization': `Bearer ${token}`,
                             'Content-Type': 'application/json',
@@ -23,7 +26,7 @@ const UserProvider = ({ children }) => {
                     const data = await response.json();
 
                     if (response.ok) {
-                        setUser(data.merchant); // Assuming the merchant data is in the 'merchant' field
+                        setUser(data.merchant);
                     } else {
                         console.error('Failed to fetch user data:', data.message);
                     }
@@ -35,6 +38,7 @@ const UserProvider = ({ children }) => {
 
         fetchUser();
     }, []);
+
 
     return (
         <UserContext.Provider value={{ user }}>

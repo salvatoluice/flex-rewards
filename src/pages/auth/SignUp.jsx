@@ -19,6 +19,7 @@ const SignUp = () => {
     const [currentStage, setCurrentStage] = useState(1);
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const[error, setError] = useState('');
     const navigate = useNavigate();
 
     const togglePasswordVisibility = () => {
@@ -62,11 +63,11 @@ const SignUp = () => {
             const result = await response.json();
 
             if (response.ok) {
-                localStorage.setItem('access_token', data.token);
-                localStorage.setItem('merchant_id', data.data.id);
+                localStorage.setItem('access_token', result.token);
+                localStorage.setItem('merchant_id', result.data.id);
                 navigate('/merchant/dashboard');
             } else {
-                setError(data.message || 'Login failed');
+                setError(result.message || 'Login failed');
             }
         } catch (error) {
             console.error('Error:', error);

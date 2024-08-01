@@ -29,7 +29,7 @@ const Navbar = () => {
                     }
                 </button>
                 {open && (
-                    <div className="absolute bg-white w-[200px] top-6 right-5 rounded-md p-4 flex flex-col gap-2">
+                    <div className="absolute z-20 bg-white w-[200px] top-6 right-5 rounded-md p-4 flex flex-col gap-2">
                         <Link to='/' className='text-gray-700 font-medium text-[15px] hover:text-primary'>Home</Link>
                         <Link to='/company/about' className='text-gray-700 font-medium text-[15px] hover:text-primary'>About</Link>
                         <Link to='/features' className='text-gray-700 font-medium text-[15px] hover:text-primary'>Features</Link>

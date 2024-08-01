@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
-import logo from '../assets/flexi.png';
+import logo from '../assets/flexi_logo_amber.svg';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -8,7 +9,10 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap -mx-4">
           <div className="w-full md:w-1/4 px-4 mb-8 md:mb-0">
-            <img src={logo} className='w-[100px] h-auto -ml-4' alt="" />
+            <Link to='/' className="flex items-center gap-2">
+              <img src={logo} className='w-auto h-[25px]' alt="" />
+              <p className="text-[#FFCC08] hidden md:flex font-medium tracking-wider text-[19px]">Flexirewards</p>
+            </Link>
             <p className="text-gray-600 font-light text-[14px] mt-2 ">
               Flexi is a flexible payment system that allows you to make purchases and pay over time. We provide the best payment solutions for your needs.
             </p>

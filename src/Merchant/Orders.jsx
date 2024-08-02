@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { TailSpin } from 'react-loader-spinner'; // Importing the loader component
 import Layout from './Layout';
 import { FaRegEye } from 'react-icons/fa';
 
@@ -8,6 +9,7 @@ const Orders = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true); // Loading state
   const ordersPerPage = 12;
 
   useEffect(() => {
@@ -15,6 +17,7 @@ const Orders = () => {
   }, [activeTab]);
 
   const fetchOrders = async (status) => {
+    setLoading(true); // Start loading
     const token = localStorage.getItem('access_token');
     const merchant_id = localStorage.getItem('merchant_id');
 
@@ -36,6 +39,8 @@ const Orders = () => {
       }
     } catch (error) {
       console.error('Error fetching orders:', error);
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -91,25 +96,41 @@ const Orders = () => {
             </tr>
           </thead>
           <tbody>
-            {currentOrders.map((order) => (
-              <tr key={order.id}>
-                <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{order.id}</td>
-                <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{order.customer.first_name} {order.customer.last_name}</td>
-                <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{order.deal.title}</td>
-                <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">KES {order.order.total}</td>
-                <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{order.discount_applied}</td>
-                <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{order.order.loyalty_points}</td>
-                <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">
-                  <button
-                    onClick={() => handleViewDetails(order)}
-                    className="text-primary"
-                  >
-                    <FaRegEye size={18} />
-                  </button>
+            {loading ? (
+              <tr>
+                <td colSpan="6" className="py-4">
+                  <div className="flex justify-center items-center">
+                    <TailSpin
+                      height="25"
+                      width="25"
+                      color="#4B5563"
+                      ariaLabel="loading"
+                    />
+                  </div>
                 </td>
               </tr>
-            ))}
+            ) : (
+              currentOrders.map((order) => (
+                <tr key={order.id}>
+                  <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{order.id}</td>
+                  <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{order.customer.first_name} {order.customer.last_name}</td>
+                  <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{order.deal.title}</td>
+                  <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">KES {order.order.total}</td>
+                  <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{order.discount_applied}</td>
+                  <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{order.order.loyalty_points}</td>
+                  <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">
+                    <button
+                      onClick={() => handleViewDetails(order)}
+                      className="text-primary"
+                    >
+                      <FaRegEye size={18} />
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
+
         </table>
 
         <div className="flex justify-start items-center mt-2">
@@ -137,33 +158,14 @@ const Orders = () => {
                 <p className='flex flex-col mb-3 text-gray-600 font-light text-[13px]'><span className='text-gray-700 font-medium text-[14px]'>Discount Applied</span> KES {selectedOrder.discount_applied}</p>
               </div>
               <p className='flex flex-col mb-3 text-gray-600 font-light text-[13px]'><span className='text-gray-700 font-medium text-[14px]'>Loyalty Points</span> {selectedOrder.order.loyalty_points}</p>
-              <p className="font-medium text-[18px] mt-4">Order Items</p>
-              <div className="overflow-x-auto">
-                <table className="min-w-full">
-                  <thead>
-                    <tr>
-                      <th className="py-3 px-4 border-b text-gray-700 text-start font-medium text-[15px] border-gray-300">Deal</th>
-                      <th className="py-3 px-4 border-b text-gray-700 text-start font-medium text-[15px] border-gray-300">Quantity</th>
-                      <th className="py-3 px-4 border-b text-gray-700 text-start font-medium text-[15px] border-gray-300">Price</th>
-                      <th className="py-3 px-4 border-b text-gray-700 text-start font-medium text-[15px] border-gray-300">Discount</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{selectedOrder.deal.title}</td>
-                      <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{selectedOrder.quantity}</td>
-                      <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">KES {selectedOrder.price}</td>
-                      <td className="py-2 px-4 border-b text-gray-600 font-light text-[13px] border-gray-200">{selectedOrder.discount_applied}%</td>
-                    </tr>
-                  </tbody>
-                </table>
+              <div className="mt-4 flex justify-end">
+                <button
+                  onClick={closeModal}
+                  className="px-4 py-2 bg-gray-500 text-white rounded"
+                >
+                  Close
+                </button>
               </div>
-              <button
-                onClick={closeModal}
-                className="mt-6 px-6 py-1.5 bg-primary text-white rounded"
-              >
-                Close
-              </button>
             </div>
           </div>
         )}

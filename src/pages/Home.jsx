@@ -1,13 +1,11 @@
 import React from 'react'
 import { BsApple, BsArrowUpRight } from 'react-icons/bs'
 import { FaGooglePlay } from 'react-icons/fa'
-import { IoMdSend } from 'react-icons/io'
 import img1 from '../assets/convenient.png';
 import img2 from '../assets/flexibility.png';
 import img3 from '../assets/rate.png'
 import image from '../assets/Image.png'
 import Navbar from '../Index/Navbar'
-import Hero from '../Index/Hero'
 import Footer from '../Index/Footer'
 
 const Home = () => {
@@ -18,7 +16,7 @@ const Home = () => {
         <div>
             <div className="h-full">
                 <Navbar />
-                <section className="imagebg h-[93vh] px-[10%] flex items-center ">
+                <section className="imagebg h-[93vh] px-[5%] flex items-center ">
                     <div className="relative h-full w-full flex items-center">
                         <div
                             style={blueDivStyle}
@@ -43,7 +41,7 @@ const Home = () => {
             </div>
 
             {/* Banner section */}
-            <section className="w-full bg-primary py-6 gap-4 md:gap-0 px-[10%] flex flex-col md:flex-row ">
+            <section className="w-full bg-primary py-6 gap-4 md:gap-0 px-[5%] flex flex-col md:flex-row ">
                 <div className="flex flex-col gap-2 w-full md:w-[30%]">
                     <img src={img1} className="w-[48px] h-[48px] " alt="" />
                     <p className="text-secondary text-[32px] font-semibold ">
@@ -73,7 +71,7 @@ const Home = () => {
                 </div>
             </section>
 
-            <section className="px-[10%] bg-white flex flex-col md:flex-row items-center py-10 ">
+            <section className="px-[5%] bg-white flex flex-col md:flex-row items-center py-10 ">
                 <div className="relative h-full w-full gap-4 md:gap-8 flex flex-col md:flex-row items-center">
                     <div className="flex w-full md:w-[50%]">
                         <div
@@ -102,7 +100,7 @@ const Home = () => {
             </section>
 
             {/* Key features */}
-            <section className="flex flex-col md:flex-row bg-[#EDF0FF] gap-4 py-8 items-center px-[10%] ">
+            <section className="flex flex-col md:flex-row bg-gray-100 gap-4 py-8 items-center px-[5%] ">
                 <div className="flex flex-col gap-4 justify-start text-start">
                     <p className="text-[14px] uppercase text-primary font-medium -mb-4 ">
                         Key features
@@ -172,7 +170,7 @@ const Home = () => {
             </section>
 
             {/*  */}
-            <section className="flex bg-gray-50 flex-col w-full px-[10%] justify-center items-center py-6">
+            <section className="flex bg-gray-50 flex-col w-full px-[5%] justify-center items-center py-6">
                 <p className="uppercase text-[16px] text-primary">how it works</p>
                 <p className="capitalize text-[32px] text-secondary font-semibold">
                     why Flexi
@@ -230,7 +228,7 @@ const Home = () => {
                 </div>
             </section>
             {/*  */}
-            <section className="flex flex-col md:flex-row px-[10%] py-6 items-center bg-primary">
+            <section className="flex flex-col md:flex-row px-[5%] py-6 items-center bg-primary">
                 <div className="flex flex-col gap-2 w-full md:w-1/2">
                     <p className="flex text-secondary text-[20px] lg:text-[32px] font-medium capitalize">
                         join the future of finance and payments

@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import logo from '../assets/flexi_logo_amber.svg';
 import { Link } from 'react-router-dom';
 import { RiMenu3Fill } from 'react-icons/ri';
 import { IoMdClose } from 'react-icons/io';
+import { UserContext } from '../context/AuthContext';
 
 const Navbar = () => {
     const [open, setOpen] = useState(false);
+    const { user } = useContext(UserContext);
+
     return (
         <div className='w-full py-1.5 px-[5%] flex justify-between items-center bg-gradient-to-r from-white to-red-50 h-[8vh]'>
             <Link to='/' className="flex items-center gap-2">
@@ -18,9 +21,15 @@ const Navbar = () => {
                 <Link to='/features' className='text-gray-700 font-medium text-[15px] hover:text-primary'>Features</Link>
                 <Link to='/company/faqs' className='text-gray-700 font-medium text-[15px] hover:text-primary'>FAQs </Link>
                 <Link to='/customer-support' className='text-gray-700 font-medium text-[15px] hover:text-primary'>Contact</Link>
-                <Link to='/merchant/sign-in'>
-                    <button className="text-white text-[14px] font-medium px-4 py-1.5 rounded-md bg-primary">Merchant Login</button>
-                </Link>
+                {
+                    user ? (
+                        <Link to='/merchant/dashboard' className="text-white text-[14px] font-medium px-4 py-1.5 rounded-md bg-primary">Dashboard</Link>
+                    ) : (
+                        <Link to='/merchant/sign-in'>
+                            <button className="text-white text-[14px] font-medium px-4 py-1.5 rounded-md bg-primary">Merchant Login</button>
+                        </Link>
+                    )
+                }
             </div>
             <div className="flex md:hidden text-primary relative">
                 <button onClick={() => setOpen(!open)}>
@@ -35,9 +44,15 @@ const Navbar = () => {
                         <Link to='/features' className='text-gray-700 font-medium text-[15px] hover:text-primary'>Features</Link>
                         <Link to='/company/faqs' className='text-gray-700 font-medium text-[15px] hover:text-primary'>FAQs </Link>
                         <Link to='/customer-support' className='text-gray-700 font-medium text-[15px] hover:text-primary'>Contact</Link>
-                        <Link to='/merchant/sign-in'>
-                            <button className="text-white text-[14px] font-medium px-4 py-1.5 rounded-md bg-primary">Merchant Login</button>
-                        </Link>
+                        {
+                            user ? (
+                                <Link to='/merchant/dashboard' className="text-white text-[14px] font-medium px-4 py-1.5 rounded-md bg-primary">Dashboard</Link>
+                            ) : (
+                                <Link to='/merchant/sign-in'>
+                                    <button className="text-white text-[14px] font-medium px-4 py-1.5 rounded-md bg-primary">Merchant Login</button>
+                                </Link>
+                            )
+                        }
                     </div>
                 )}
             </div>

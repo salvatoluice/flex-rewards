@@ -1,24 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Layout from './Layout'
 import { orders } from '../data'
-import { IoIosSearch } from 'react-icons/io'
+import { UserContext } from '../context/AuthContext'
 
 const Dashboard = () => {
+    const { user } = useContext(UserContext)
   return (
     <Layout>
         <div className="flex border-b w-full border-gray-300 mb-4">
-            <p className="text-[14px] text-gray-600 ">Hello, <span className="text-black font-medium">James</span></p>
+            <p className="text-[14px] text-gray-600 ">Hello, <span className="text-black font-medium">{user?.username}</span></p>
         </div>
         <div className="w-full mb-4 flex flex-col md:flex-row gap-4">
             <div className="w-full flex flex-col p-4 rounded-md gap-2 bg-primary">
-                <p className="text-white font-light text-[14px] ">Lorem Ipsum</p>
+                <p className="text-white font-light text-[14px] capitalize">received orders</p>
                 <hr />
                 <p className="text-white text-[22px] font-medium">23</p>
             </div>
               <div className="w-full flex flex-col p-4 rounded-md gap-2 bg-red-500">
-                  <p className="text-white font-light text-[14px] ">Lorem Ipsum</p>
+                  <p className="text-white font-light text-[14px] capitalize">delivered orders</p>
                   <hr />
-                  <p className="text-white text-[22px] font-medium">23</p>
+                  <p className="text-white text-[22px] font-medium">0</p>
               </div>
         </div>
         <div className="flex mb-4 w-full grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -28,7 +29,7 @@ const Dashboard = () => {
                 <p className="text-gray-700 text-[20px] font-medium">43</p>
             </div>
               <div className="p-4 bg-white rounded-md flex flex-col gap-2">
-                  <p className="text-gray-600 text-[14px] font-medium">Deals</p>
+                  <p className="text-gray-600 text-[14px] font-medium">Orders</p>
                   <hr />
                   <p className="text-gray-700 text-[20px] font-medium">43</p>
               </div>

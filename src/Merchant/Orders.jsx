@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TailSpin } from 'react-loader-spinner'; // Importing the loader component
+import { TailSpin } from 'react-loader-spinner';
 import Layout from './Layout';
 import { FaRegEye } from 'react-icons/fa';
 
@@ -9,7 +9,7 @@ const Orders = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [loading, setLoading] = useState(true); // Loading state
+  const [loading, setLoading] = useState(true);
   const ordersPerPage = 12;
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const Orders = () => {
   }, [activeTab]);
 
   const fetchOrders = async (status) => {
-    setLoading(true); // Start loading
+    setLoading(true);
     const token = localStorage.getItem('access_token');
     const merchant_id = localStorage.getItem('merchant_id');
 
@@ -40,7 +40,7 @@ const Orders = () => {
     } catch (error) {
       console.error('Error fetching orders:', error);
     } finally {
-      setLoading(false); // Stop loading
+      setLoading(false);
     }
   };
 

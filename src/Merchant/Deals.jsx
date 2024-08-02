@@ -98,7 +98,7 @@ const Deals = () => {
 
     return (
         <Layout>
-            <div className="">
+            <div className="mt-10 md:mt-0">
                 <div className="flex w-full mb-4 justify-between items-center">
                     <button
                         onClick={() => setShowCreateModal(true)}

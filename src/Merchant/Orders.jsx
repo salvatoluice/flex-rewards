@@ -62,7 +62,7 @@ const Orders = () => {
 
   return (
     <Layout>
-      <div className="flex items-center mb-4 border-b-2 border-gray-200">
+      <div className="flex items-center mt-10 md:mt-0 mb-4 border-b-2 border-gray-200">
         <button
           className={`py-2 px-4 text-[14px] ${activeTab === 'received' ? 'text-primary border-b-2 border-primary' : 'text-gray-600'}`}
           onClick={() => setActiveTab('received')}
@@ -145,23 +145,39 @@ const Orders = () => {
           ))}
         </div>
 
-        {/* Order Details Modal */}
         {showModal && selectedOrder && (
           <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-            <div className="bg-white p-6 rounded shadow-lg w-[90%] md:w-1/2 max-[90vh] overflow-y-auto">
+            <div className="bg-white p-6 rounded shadow-lg w-[90%] md:w-1/3 max-h-[90vh] overflow-y-auto">
               <h2 className="text-xl font-bold mb-4">Order Details</h2>
               <p className='flex flex-col mb-3 text-gray-600 font-light text-[13px]'><span className='text-gray-700 font-medium text-[14px]'>Order ID</span> {selectedOrder.id}</p>
-              <p className='flex flex-col mb-3 text-gray-600 font-light text-[13px]'><span className='text-gray-700 font-medium text-[14px]'>Customer</span> {selectedOrder.customer.first_name} {selectedOrder.customer.last_name}</p>
-              <p className='flex flex-col mb-3 text-gray-600 font-light text-[13px]'><span className='text-gray-700 font-medium text-[14px]'>Deal</span> {selectedOrder.deal.title}</p>
               <div className="flex w-full items-center justify-between">
-                <p className='flex flex-col mb-3 text-gray-600 font-light text-[13px]'><span className='text-gray-700 font-medium text-[14px]'>Total</span> KES {selectedOrder.order.total}</p>
-                <p className='flex flex-col mb-3 text-gray-600 font-light text-[13px]'><span className='text-gray-700 font-medium text-[14px]'>Discount Applied</span> KES {selectedOrder.discount_applied}</p>
+                <p className='flex flex-col mb-3 text-gray-600 font-light text-[13px]'><span className='text-gray-700 font-medium text-[14px]'>Customer</span> {selectedOrder.customer.first_name} {selectedOrder.customer.last_name}</p>
+                <p className='flex flex-col mb-3 text-gray-600 font-light text-[13px]'><span className='text-gray-700 font-medium flex text-end flex-col  text-[14px]'>Customer Email</span> {selectedOrder.customer.email} </p>
+              </div>
+              <p className='flex flex-col mb-3 text-gray-600 font-light text-[13px]'><span className='text-gray-700 font-medium text-[14px]'>Deal</span> {selectedOrder.deal.title}</p>
+              <div className="flex items-center w-full justify-between">
+                <p className='flex flex-col mb-3 text-gray-600 font-light text-[13px]'>
+                  <span className='text-gray-700 font-medium text-[14px]'>Price</span>
+                  {selectedOrder.deal.price.toLocaleString('en-KE', { style: 'currency', currency: 'KES' })}
+                </p>
+                <p className='flex flex-col mb-3 text-gray-600 text-end font-light text-[13px]'>
+                  <span className='text-gray-700 font-medium text-[14px]'>Discount</span>
+                  {selectedOrder.deal.discount_percentage}%
+                </p>
               </div>
               <p className='flex flex-col mb-3 text-gray-600 font-light text-[13px]'><span className='text-gray-700 font-medium text-[14px]'>Loyalty Points</span> {selectedOrder.order.loyalty_points}</p>
+              <p className='flex flex-col mb-3 text-gray-600  font-light text-[13px]'>
+                <span className='text-gray-700 font-medium text-[14px]'>Description</span>
+                {selectedOrder.deal.description}
+              </p>
+              <p className='flex flex-col mb-3 text-gray-600 font-light text-[13px]'>
+                <span className='text-gray-700 font-medium text-[14px]'>Terms & conditions</span>
+                {selectedOrder.deal.terms_and_conditions}
+              </p>
               <div className="mt-4 flex justify-end">
                 <button
                   onClick={closeModal}
-                  className="px-4 py-2 bg-gray-500 text-white rounded"
+                  className="px-6 py-1.5 rounded-md outline-none bg-primary text-[14px] text-white font-medium"
                 >
                   Close
                 </button>

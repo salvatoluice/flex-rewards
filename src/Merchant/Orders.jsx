@@ -10,6 +10,7 @@ const Orders = () => {
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [confirming, setConfirming] = useState(false);
   const ordersPerPage = 12;
 
   useEffect(() => {
@@ -52,6 +53,32 @@ const Orders = () => {
   const closeModal = () => {
     setShowModal(false);
     setSelectedOrder(null);
+  };
+
+  const handleConfirmOrder = async () => {
+    setConfirming(true);
+    const token = localStorage.getItem('access_token');
+
+    try {
+      const response = await fetch('http://3.136.169.137/api/v1/orders/confirm-order-item', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ order_item_id: selectedOrder.id }),
+      });
+
+      if (response.ok) {
+        window.location.reload();
+      } else {
+        console.error('Failed to confirm order:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error confirming order:', error);
+    } finally {
+      setConfirming(false);
+    }
   };
 
   const indexOfLastOrder = currentPage * ordersPerPage;
@@ -147,9 +174,12 @@ const Orders = () => {
 
         {showModal && selectedOrder && (
           <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-            <div className="bg-white p-6 rounded shadow-lg w-[90%] md:w-1/3 max-h-[90vh] overflow-y-auto">
+            <div className="bg-white p-6 rounded shadow-lg w-[90%] md:w-[40%] max-h-[90vh] overflow-y-auto">
               <h2 className="text-xl font-bold mb-4">Order Details</h2>
-              <p className='flex flex-col mb-3 text-gray-600 font-light text-[13px]'><span className='text-gray-700 font-medium text-[14px]'>Order ID</span> {selectedOrder.id}</p>
+              <div className="flex w-full items-center justify-between">
+                <p className='flex flex-col mb-3 text-gray-600 font-light text-[13px]'><span className='text-gray-700 font-medium text-[14px]'>Order ID</span> {selectedOrder.id}</p>
+                <p className='flex flex-col mb-3 text-gray-600 font-light text-[13px]'><span className='text-gray-700 font-medium text-[14px]'>Status</span> {selectedOrder.status}</p>
+              </div>
               <div className="flex w-full items-center justify-between">
                 <p className='flex flex-col mb-3 text-gray-600 font-light text-[13px]'><span className='text-gray-700 font-medium text-[14px]'>Customer</span> {selectedOrder.customer.first_name} {selectedOrder.customer.last_name}</p>
                 <p className='flex flex-col mb-3 text-gray-600 font-light text-[13px]'><span className='text-gray-700 font-medium flex text-end flex-col  text-[14px]'>Customer Email</span> {selectedOrder.customer.email} </p>
@@ -174,13 +204,26 @@ const Orders = () => {
                 <span className='text-gray-700 font-medium text-[14px]'>Terms & conditions</span>
                 {selectedOrder.deal.terms_and_conditions}
               </p>
-              <div className="mt-4 flex justify-end">
+              <div className="mt-4 flex w-full gap-6 justify-end">
                 <button
                   onClick={closeModal}
-                  className="px-6 py-1.5 rounded-md outline-none bg-primary text-[14px] text-white font-medium"
+                  className="text-[14px] font-medium text-primary"
                 >
-                  Close
+                  Cancel
                 </button>
+                {selectedOrder.status === "Received" && (
+                  <button
+                    onClick={handleConfirmOrder}
+                    className="bg-primary text-white py-1.5 px-6 rounded disabled:opacity-50"
+                    disabled={confirming}
+                  >
+                    {confirming ? (
+                      <TailSpin height="20" width="20" color="#ffffff" ariaLabel="loading" />
+                    ) : (
+                      'Confirm Order'
+                    )}
+                  </button>
+                )}
               </div>
             </div>
           </div>

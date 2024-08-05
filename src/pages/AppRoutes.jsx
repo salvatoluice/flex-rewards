@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import LoginPage from './auth/LoginPage'
 import Home from './Home'
@@ -11,8 +11,19 @@ import About from '../Index/About'
 import Features from '../Index/Features'
 import FAQ from '../Index/FAQ'
 import Contact from '../Index/Contact'
+import Payments from '../Merchant/Payments'
+import { payments } from '../data'
+import Tickets from '../Merchant/Tickets'
 
 const AppRoutes = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
+
   return (
     <Routes>
       <Route path='/' element={<Home />} />
@@ -23,6 +34,8 @@ const AppRoutes = () => {
       <Route path='/merchant/dashboard' element={<Dashboard />} />
       <Route path='/merchant/deals' element={<Deals />} />
       <Route path='/merchant/orders' element={<Orders />} />
+      <Route path='/merchant/payments' element={<Payments payments={payments} loading={loading} />} />
+      <Route path='merchant/tickets' element={<Tickets />} />
 
       {/* company */}
       <Route path='/company/about' element={<About />} />

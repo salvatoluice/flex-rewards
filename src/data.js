@@ -503,4 +503,28 @@ export const fakeOrders = [
     },
 ];
 
+export const payments = [
+    { transactionId: 'TXN123456', customerName: 'John Doe', orderId: 'ORD001', amount: 1200, dateTime: '2024-08-01 10:30 AM', status: 'Completed' },
+    { transactionId: 'TXN123457', customerName: 'Jane Smith', orderId: 'ORD002', amount: 800, dateTime: '2024-08-01 11:00 AM', status: 'Pending' },
+    { transactionId: 'TXN123458', customerName: 'Alice Johnson', orderId: 'ORD003', amount: 450, dateTime: '2024-08-01 11:30 AM', status: 'Completed' },
+    { transactionId: 'TXN123459', customerName: 'Bob Brown', orderId: 'ORD004', amount: 2000, dateTime: '2024-08-01 12:00 PM', status: 'Failed' },
+    { transactionId: 'TXN123460', customerName: 'Charlie Davis', orderId: 'ORD005', amount: 1750, dateTime: '2024-08-01 12:30 PM', status: 'Completed' },
+    { transactionId: 'TXN123461', customerName: 'David Wilson', orderId: 'ORD006', amount: 950, dateTime: '2024-08-01 01:00 PM', status: 'Pending' },
+    { transactionId: 'TXN123462', customerName: 'Emily Moore', orderId: 'ORD007', amount: 1150, dateTime: '2024-08-01 01:30 PM', status: 'Completed' },
+    { transactionId: 'TXN123463', customerName: 'Frank Miller', orderId: 'ORD008', amount: 2200, dateTime: '2024-08-01 02:00 PM', status: 'Failed' },
+    { transactionId: 'TXN123464', customerName: 'Grace Lee', orderId: 'ORD009', amount: 800, dateTime: '2024-08-01 02:30 PM', status: 'Completed' },
+    { transactionId: 'TXN123465', customerName: 'Hannah Clark', orderId: 'ORD010', amount: 1300, dateTime: '2024-08-01 03:00 PM', status: 'Pending' },
+    { transactionId: 'TXN123466', customerName: 'Ian Young', orderId: 'ORD011', amount: 1000, dateTime: '2024-08-01 03:30 PM', status: 'Completed' },
+    { transactionId: 'TXN123467', customerName: 'Jill Adams', orderId: 'ORD012', amount: 670, dateTime: '2024-08-01 04:00 PM', status: 'Completed' },
+    { transactionId: 'TXN123468', customerName: 'Kevin Scott', orderId: 'ORD013', amount: 300, dateTime: '2024-08-01 04:30 PM', status: 'Failed' },
+    { transactionId: 'TXN123469', customerName: 'Laura Hill', orderId: 'ORD014', amount: 2200, dateTime: '2024-08-01 05:00 PM', status: 'Pending' },
+    { transactionId: 'TXN123470', customerName: 'Mike Turner', orderId: 'ORD015', amount: 900, dateTime: '2024-08-01 05:30 PM', status: 'Completed' },
+];
 
+export const data = [
+    { id: 1, userName: 'John Doe', userId: 101, title: 'Login Issue', description: 'Cannot log in to the system', priority: 'high', status: 'open' },
+    { id: 2, userName: 'Jane Smith', userId: 102, title: 'Payment Failure', description: 'Payment not processing', priority: 'medium', status: 'in_progress' },
+    { id: 3, userName: 'Mark Johnson', userId: 103, title: 'UI Bug', description: 'Button not responding', priority: 'low', status: 'closed' },
+    { id: 4, userName: 'Emily Davis', userId: 104, title: 'Error 404', description: 'Page not found', priority: 'high', status: 'open' },
+    { id: 5, userName: 'Michael Brown', userId: 105, title: 'Password Reset', description: 'Password reset link not working', priority: 'medium', status: 'in_progress' },
+];

@@ -13,6 +13,7 @@ const Deals = () => {
     const [deals, setDeals] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(true);
+    const [createLoading, setCreateLoading] = useState(false);
     const dealsPerPage = 12;
 
     useEffect(() => {
@@ -59,6 +60,7 @@ const Deals = () => {
     };
 
     const handleCreateDeal = async (dealData) => {
+        setCreateLoading(true);
         try {
             const token = localStorage.getItem('access_token');
             const merchant_id = localStorage.getItem('merchant_id');
@@ -76,7 +78,7 @@ const Deals = () => {
             formData.append('terms_and_conditions', dealData.terms_and_conditions);
             if (dealData.image) formData.append('image', dealData.image);
 
-            const response = await fetch('http://3.136.169.137/api/v1/deals/create-deals', {
+            const response = await fetch('http://3.136.169.137/api/v1/deals/create-deal', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -88,11 +90,16 @@ const Deals = () => {
                 const newDeal = await response.json();
                 setDeals([newDeal, ...deals]);
                 setShowCreateModal(false);
+                window.location.reload();
             } else {
                 console.error('Failed to create deal:', response.statusText);
+                setCreateLoading(false);
             }
         } catch (error) {
             console.error('Error creating deal:', error);
+            setCreateLoading(false);
+        } finally {
+            setCreateLoading(false);
         }
     };
 
@@ -179,8 +186,9 @@ const Deals = () => {
 
                 <CreateDealModal
                     show={showCreateModal}
-                    onClose={() => setShowCreateModal(false)}
+                    onClose={() => {}}
                     onCreate={handleCreateDeal}
+                    loading={createLoading}
                 />
                 <DealDetailsModal
                     show={showDetailsModal}

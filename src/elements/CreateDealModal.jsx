@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { TailSpin } from 'react-loader-spinner';
 
-const CreateDealModal = ({ show, onClose, onCreate }) => {
+const CreateDealModal = ({ show, onClose, onCreate, loading }) => {
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
         title: '',
@@ -19,6 +20,7 @@ const CreateDealModal = ({ show, onClose, onCreate }) => {
 
     const handleNext = () => setStep(step + 1);
     const handleBack = () => setStep(step - 1);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({ ...prevData, [name]: value }));
@@ -100,19 +102,20 @@ const CreateDealModal = ({ show, onClose, onCreate }) => {
                             <div className="flex justify-end">
                                 <button
                                     type="button"
-                                    onClick={onClose}
+                                    onClick={() => {window.location.reload()}}
                                     className="text-primary font-medium text-[14px]"
                                 >
                                     Cancel
                                 </button>
                                 <button
-                                    type="button"
+                                    type="button" 
                                     onClick={handleNext}
                                     className="bg-primary text-white py-1.5 px-6 rounded-md ml-2"
                                 >
                                     Next
                                 </button>
                             </div>
+
                         </>
                     ) : (
                         <>
@@ -171,17 +174,27 @@ const CreateDealModal = ({ show, onClose, onCreate }) => {
                                 <button
                                     type="button"
                                     onClick={handleBack}
-                                    className="text-primary font-medium text-[14px]"
+                                    className="text-primary font-medium text-[14px] mr-3"
                                 >
                                     Back
                                 </button>
-                                <button
-                                    type="button"
-                                    onClick={handleSubmit}
-                                    className="bg-primary text-white py-1.5 px-6 rounded-md ml-2"
-                                >
-                                    Upload
-                                </button>
+                                    <button
+                                        type='button'
+                                        onClick={handleSubmit}
+                                        disabled={loading} 
+                                        className={`px-6 py-1.5 rounded ${loading ? 'bg-gray-400' : 'bg-primary'} text-white`}
+                                    >
+                                        {loading ? (
+                                            <TailSpin
+                                                height="20"
+                                                width="20"
+                                                color="#ffffff"
+                                                ariaLabel="loading"
+                                            />
+                                        ) : (
+                                            'Upload'
+                                        )}
+                                    </button>
                             </div>
                         </>
                     )}

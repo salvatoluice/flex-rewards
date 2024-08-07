@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { HiOutlineUsers } from 'react-icons/hi2';
 import logo from '../assets/flexi_logo_amber.svg';
 
 const SideNav = () => {
     const location = useLocation();
+    const navigate = useNavigate();
 
     return (
         <div className='hidden md:flex flex-col w-[20%] bg-white h-[100vh] overflow-y-auto px-8 py-4 h-[100vh]'>
@@ -118,7 +119,16 @@ const SideNav = () => {
                         </Link>
                     </div>
                 </div>
-                <button className="w-full bg-primary py-1.5 text-white rounded-md outline-none text-[14px]">Log out</button>
+                <button
+                    className="w-full bg-primary py-1.5 text-white rounded-md outline-none text-[14px]"
+                    onClick={() => {
+                        localStorage.removeItem('access_token');
+                        navigate('/');
+                        window.location.reload();
+                    }}
+                >
+                    Log out
+                </button>
             </div>
         </div>
     );
